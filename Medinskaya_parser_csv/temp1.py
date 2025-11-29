@@ -66,15 +66,13 @@ with open(filename) as f:
     for line in f:
         line_number += 1
         line = line.strip()
-
         if line == "":
             continue
-
         row = line.split(";")
         line_data = parse_line(row, line_number)
-        if line_data is None:
-            exit()  # останавливаемся при первой ошибке
-        line_datas.append(line_data)
+        # Добавляем ТОЛЬКО если данные корректны
+        if line_data is not None:
+            line_datas.append(line_data) # Если будет ошибка, данные выводятся о ней, но в статистику строка не попадает
 
 # Если данных нет
 if len(line_datas) == 0:
